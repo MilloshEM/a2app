@@ -27,8 +27,7 @@ class Words {
 				this.word2 = word2;
 			}
 		}
-		let input1 = document.getElementById('input1');
-		let input2 = document.getElementById('input2');
+
 		const wordsAgain = [];
 		let pusher = new Words(input1.value, input2.value);
 			wordsAgain.push(pusher);
@@ -49,24 +48,26 @@ class Words {
 			
 	};
 
-const wordSearcher = ()=> {      //OVA FUNKCIJA RADI...
+const wordSearcher = ()=> {      //OVA FUNKCIJA RADI... ONA PRIKAZUJE REZULTAT PRETRAGE 
+	                             //KORISNIKA, I TD... BICE JOS RAZVIJANA.
 
 	let searchWords = document.getElementById("searchWords");
 
 	let xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
-			var response = JSON.parse(xhttp.responseText);
-			var words = response.words1;
-
-			words.forEach(word => {
+			let response = JSON.parse(xhttp.responseText);
+			let words = response.words1;
+			console.log(words);
+			 
+		words.forEach(word => {
 				if (word.word1 === searchWords.value || word.word2 === searchWords.value) 
 					{return displayWords.innerHTML = word.word1 + ' ' + word.word2;}
 				else if (searchWords.value === '') 
 					{return displayWords.innerHTML = 'bitte, geben sie die Wort ein!!';}
 				 })
+			}
 			
-		}
 	}
 	xhttp.open("GET", "words1.json", true);
 	xhttp.send();

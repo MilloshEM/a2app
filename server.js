@@ -1,21 +1,6 @@
 const http = require("http");
 const path = require("path");
 const fs = require("fs");
-const express = require('express');
-var execPHP = require('./execphp.js')();    
-                                            
-
-let app = express();
-
-
-execPHP.phpFolder = "C:\\Users\\mm\\Desktop\\learn etc\\a21";
-
-app.use('*.php',function(request,response,next) {
-	execPHP.parseFile(request.originalUrl,function(phpResult) {
-		response.write(phpResult);
-		response.end();
-	});
-});
 
 
 
