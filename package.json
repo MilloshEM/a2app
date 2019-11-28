@@ -1,0 +1,21 @@
+{
+  "name": "a21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "shommyEm",
+  "license": "ISC",
+  "dependencies": {
+    "exec-php": "0.0.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
