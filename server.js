@@ -1,88 +1,41 @@
-const http = require("http");
-const path = require("path");
-const fs = require("fs");
+const express = require('express')
+const bodyParser = require('body-parser')
+const fs = require('fs')
+
+const port = 3000
+const app = express()
+
+
+app.use(express.static('public'))
+app.use(bodyParser.json())
 
 
 
-const server = http.createServer((req, res) => {
+app.get('/api/words', (req, res) => {
 
-  // Build file path
-  let filePath = path.join(
-    __dirname,
-    req.url === "/" ? "index.html"  : req.url
-  );
+    fs.readFile('content/words1.json', (err, content) => {
 
-  // Extension of file
-  let extname = path.extname(filePath);
+        res.writeHead(200, { "Content-Type": "application/json" })
+        res.end(content, "utf8")
 
-  // Initial content type
-  let contentType = "text/html";
+      })
 
-  // Check ext and set content type
-  switch (extname) {
-    case ".js":
-      contentType = "text/javascript";
-      break;
-    case ".css":
-      contentType = "text/css";
-      break;
-    case ".json":
-      contentType = "application/json";
-      break;
-    case ".png":
-      contentType = "image/png";
-      break;
-    case ".jpg":
-      contentType = "image/jpg";
-      break;
-     // case ".php":
-      //contentType = "PHP Source File";
-     // break;
-  }
+})
 
-  // Check if contentType is text/html but no .html file extension
-  if (contentType == "text/html" && extname == "") filePath += ".html";
+app.post('/api/word', (req, res) => {
 
-  // log the filePath
-  console.log(filePath);
+    let newWords = req.body;
+    res.writeHead(200);
+    res.end("word added", "utf8")
 
-  // Read File
-  fs.readFile(filePath, (err, content) => {
-    if (err) {
-      if (err.code == "ENOENT") {
-        // Page not found
-        fs.readFile(
-          path.join(__dirname, "404.html"),
-          (err, content) => {
-            res.writeHead(200, { "Content-Type": "text/html" });
-            res.end(content, "utf8");
-          }
-        );
-      } else {
-        //  Some server error
-        res.writeHead(500);
-        res.end(`Server Error: ${err.code}`);
-      }
-    } else {
-      // Success
-      res.writeHead(200, { "Content-Type": contentType });
-      res.end(content, "utf8");
-    }
-  });
-});
+    fs.readFile('content/words1.json', (err, content) => {
+
+        let words = JSON.parse(content);
+        words.words1.push(newWords)
+        fs.writeFile('content/words1.json', JSON.stringify(words), ()=>{})
+        
+      })
+})
 
 
-
-//Write file                                 <=       OVDE JE PROBLEM
-/* let data = NESTO STO TREBA DA STIGNE OVDJE SA FAJLA script.js (VALJDA).
-let json = JSON.stringify(data);
-fs.writeFile('words1.json', json, error => {
-  if (error) throw error;
-  console.log('Rijeci su unesene');
-});
-*/
-const PORT = process.env.PORT || 3000;
-
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
