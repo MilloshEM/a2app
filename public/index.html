@@ -1,38 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-		<meta charset="utf-8" /><!--POTREBNO UKLJUCITI D SE IZBJEGNE GRESKA U KONZOLI-->
-	<title></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>A2/1 APP</title>
 </head>
-<body>
+
+<body style="text-align: center;">
+
 	<h1>A2/1 APP</h1>
-	<br>
-	<br>
-	<br>
-	<br>
-	<div id="inputField" style="text-align: center;">
 
-	<input type="text" id="input1">
-	<label for="input1">input word1</label>
-	<br>
-	<br>
-	<input type="text"  id="input2">
-	<label for="input2">input word2</label>
-	<br>
-	<button id="addWordButton" onclick="pushWords()">Input words</button>
+	<div>
 
-	<br>
-	<br>
-	<br>
-	<br>
-	<input type="text" name="input3" id="searchWords">
-	<br>
-	<button onclick="wordSearcher()">serch</button>
-	<br>
-	<br>
-	<br>
-	<p id="displayWords"></p>
-	<script type="text/javascript"  src="scripts/script.js"></script>
-</div>
+		<input type="text" id="input1">
+		<label for="input1">input word1</label>
+		<br />
+
+		<input type="text" id="input2">
+		<label for="input2">input word2</label>
+		<br />
+
+		<button id="addWords">add words</button>
+	</div>
+	<br />
+
+	<div>
+		<input type="text" name="input3" id="searchWords">
+
+		<button id="search">serch</button>
+		<p id="displayWords"></p>
+
+	</div>
+
+
+	<script type="text/javascript" src="scripts/script.js"></script>
 </body>
+
 </html>
